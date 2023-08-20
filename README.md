@@ -7,7 +7,7 @@ The Ship-D Hulls are represented by a parametric design scheme that allows for a
 
 - Principal Dimensions (7 terms)
 
-![Principal Dimensions](image.png)
+![Principal Dimensions](support files/image.png)
 
 - Midship shape (4 terms)
 
