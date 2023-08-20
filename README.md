@@ -75,7 +75,7 @@ The Ship-D Dataset is comprised of three subsets:
 
 Here is an example of the diversity of the hulls seen in the Ship-D dataset. 
 ![Dataset Diversity](support_files/image-4.png)
-Many of these hulls do not look like realistic ships. However, these designs contain random combinations of features that can leader to better performance. The goal of the Ship-D dataset is to create the information to learn how shape features lead to performance in hull design. 
+Many of these hulls do not look like realistic ships. However, these designs contain random combinations of features that can lead to better performance. The goal of the Ship-D dataset is to create the information to learn how shape features lead to performance in hull design. 
 
 For more information of deep generative artificial intelligence for engineering deisgn, please check out our lab's website:
 
