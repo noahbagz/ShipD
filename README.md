@@ -50,15 +50,19 @@ Additionally, there are 32 Wave drag coefficients across 8 speeds and 4 draft ma
 Here are some custom designed hulls using the parameterization:
 
 Container Ship
+
 ![Alt text](support_files/image-8.png)
 
 Planing Hull
+
 ![Alt text](support_files/image-5.png)
 
 Sailing Yacht
+
 ![Alt text](support_files/image-6.png)
 
 DDG-1000 Zumwalt Class (Approximate Reconstruction)
+
 ![Alt text](support_files/image-7.png)
 
 
