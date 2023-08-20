@@ -7,21 +7,21 @@ The Ship-D Hulls are represented by a parametric design scheme that allows for a
 
 - Principal Dimensions (7 terms)
 
-![Principal Dimensions](support files/image.png)
+![Principal Dimensions](support_files/image.png)
 
 - Midship shape (4 terms)
 
 
-![Cross Section](image-1.png)
+![Cross Section](support_files/image-1.png)
 
 - Bow shape (9 terms)
 - Stern shape (11 terms)
 
-![Bow and Stern](image-2.png)
+![Bow and Stern](support_files/image-2.png)
 
 - Bulb Geometries (14 Terms)
 
-![Bulbs](image-3.png)
+![Bulbs]support_files/image-3.png)
 
 The parameters feed into a set of equations that define the surface of the hull. In addition to 45 parameters, there are also a set of 49 algebraic design constraints that ensure two conditions for the hulls:
 1) The hull is watertight
@@ -50,16 +50,16 @@ Additionally, there are 32 Wave drag coefficients across 8 speeds and 4 draft ma
 Here are some custom designed hulls using the parameterization:
 
 Container Ship
-![Alt text](image-8.png)
+![Alt text](support_files/image-8.png)
 
 Planing Hull
-![Alt text](image-5.png)
+![Alt text](support_files/image-5.png)
 
 Sailing Yacht
-![Alt text](image-6.png)
+![Alt text](support_files/image-6.png)
 
 DDG-1000 Zumwalt Class (Approximate Reconstruction)
-![Alt text](image-7.png)
+![Alt text](support_files/image-7.png)
 
 
 
@@ -70,7 +70,7 @@ The Ship-D Dataset is comprised of three subsets:
 3) Hulls with out bulbs. Without bulbs and otherwise exploring the full breadth of the design space, these hulls are more representative of smaller boats. (Constrained Randomized Set 3)
 
 Here is an example of the diversity of the hulls seen in the Ship-D dataset. 
-![Dataset Diversity](image-4.png)
+![Dataset Diversity](support_files/image-4.png)
 Many of these hulls do not look like realistic ships. However, these designs contain random combinations of features that can leader to better performance. The goal of the Ship-D dataset is to create the information to learn how shape features lead to performance in hull design. 
 
 For more information of deep generative artificial intelligence for engineering deisgn, please check out our lab's website:
