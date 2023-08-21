@@ -21,7 +21,7 @@ The Ship-D Hulls are represented by a parametric design scheme that allows for a
 
 - Bulb Geometries (14 Terms)
 
-![Bulbs]support_files/image-3.png)
+![Bulbs](support_files/image-3.png)
 
 The parameters feed into a set of equations that define the surface of the hull. In addition to 45 parameters, there are also a set of 49 algebraic design constraints that ensure two conditions for the hulls:
 1) The hull is watertight
