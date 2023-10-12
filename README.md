@@ -83,6 +83,35 @@ https://decode.mit.edu/
 
 The DeCoDE Lab creates public datasets, design representations, and deep generative tools.
 
+## Generate a Hull Design ## 
+
+In order to generate a hull, simply import the vector into a numpy array:
+'''
+import numpy as np
+from HullParameterization import Hull_Parameterization as HP
+
+Vectors = np.loadtxt('./Input_Vectors_SampleHulls.csv', delimiter=",", dtype=np.float64)
+
+#Create one hull: 
+Hull = HP(Vectors[0])
+
+#Check Constriants:
+constraints = Hull.input_Constraints()
+cons = constraints > 0
+print(sum(cons)) # should be zero
+
+#make the .stl file of the hull:
+strpath =  './Sample_Hull_Mesh' 
+
+mesh = Hull.gen_stl(NUM_WL=100, PointsPerWL=800, bit_AddTransom = 1, bit_AddDeckLid = 1, namepath = strpath)
+
+'''
+
+All calculations performed for dataset generation are found in the 'Compute_Dataset_Entirety.ipynb' notebook
+
+
+
+
 ## Here is a link to the Ship-D paper:
 
 https://decode.mit.edu/assets/papers/ShipD_Dataset_Bagazinski_and_Ahmed_2023.pdf
