@@ -94,8 +94,12 @@ Bagazinski, Noah J., and Faez Ahmed. "Ship-D: Ship Hull Dataset for Design Optim
 ## Bibtex Citation
 
 @article{bagazinski2023ship,
+
   title={Ship-D: Ship Hull Dataset for Design Optimization using Machine Learning},
+  
   author={Bagazinski, Noah J and Ahmed, Faez},
+  
   journal={arXiv preprint arXiv:2305.08279},
+  
   year={2023}
 }
