@@ -86,7 +86,7 @@ The DeCoDE Lab creates public datasets, design representations, and deep generat
 ## Generate a Hull Design ## 
 
 In order to generate a hull, simply import the vector into a numpy array:
-'''
+```
 import numpy as np
 from HullParameterization import Hull_Parameterization as HP
 
@@ -105,7 +105,7 @@ strpath =  './Sample_Hull_Mesh'
 
 mesh = Hull.gen_stl(NUM_WL=100, PointsPerWL=800, bit_AddTransom = 1, bit_AddDeckLid = 1, namepath = strpath)
 
-'''
+```
 
 All calculations performed for dataset generation are found in the 'Compute_Dataset_Entirety.ipynb' notebook
 
