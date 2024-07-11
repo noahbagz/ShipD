@@ -118,17 +118,16 @@ https://decode.mit.edu/assets/papers/ShipD_Dataset_Bagazinski_and_Ahmed_2023.pdf
 
 ## Citation (Chicago)
 
-Bagazinski, Noah J., and Faez Ahmed. "Ship-D: Ship Hull Dataset for Design Optimization using Machine Learning." arXiv preprint arXiv:2305.08279 (2023).
+Bagazinski, Noah J., and Faez Ahmed. "Ship-D: Ship Hull Dataset for Design Optimization Using Machine Learning." In International Design Engineering Technical Conferences and Computers and Information in Engineering Conference, vol. 87301, p. V03AT03A028. American Society of Mechanical Engineers, 2023.
 
 ## Bibtex Citation
 
-@article{bagazinski2023ship,
-
-  title={Ship-D: Ship Hull Dataset for Design Optimization using Machine Learning},
-  
+@inproceedings{bagazinski2023ship,
+  title={Ship-D: Ship Hull Dataset for Design Optimization Using Machine Learning},
   author={Bagazinski, Noah J and Ahmed, Faez},
-  
-  journal={arXiv preprint arXiv:2305.08279},
-  
-  year={2023}
+  booktitle={International Design Engineering Technical Conferences and Computers and Information in Engineering Conference},
+  volume={87301},
+  pages={V03AT03A028},
+  year={2023},
+  organization={American Society of Mechanical Engineers}
 }
