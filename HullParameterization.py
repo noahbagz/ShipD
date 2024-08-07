@@ -140,7 +140,7 @@ class Hull_Parameterization:
         
         self.GenBulbForms()
         #C5 = print(self.BulbFormConstraints())
-        
+
         
         
     '''
@@ -1544,7 +1544,7 @@ class Hull_Parameterization:
     
     
     '''
-    def gen_MeshGridPointCloud(self, NUM_WL = 51, PointsPerLOA = 501, Z = [], X = [], bit_GridOrList = 0):
+    def gen_MeshGridPointCloud(self, NUM_WL = 51, PointsPerLOA = 501, Z = [], X = [], bit_GridOrList = 1):
         # This generates each waterline with even x and z spacing in a grid
         #Z and X assignments supercede NUM_WL and PointsPerLOA Assignments
         
@@ -1638,8 +1638,11 @@ class Hull_Parameterization:
         
         
         
+
+        print(Z.shape)
+
         
-        if Z == []:
+        if len(Z) == 0:
             z = self.gen_WLHeights(NUM_WL)
         else:
             z = Z
@@ -1756,24 +1759,38 @@ class Hull_Parameterization:
         return np.array(WL)
         
     
-    def gen_stl(self, NUM_WL = 50, PointsPerWL = 300, bit_AddTransom = 1, bit_AddDeckLid = 0, namepath = 'Hull_Mesh'):
+    def gen_stl(self, NUM_WL = 50, PointsPerWL = 300, bit_AddTransom = 1, bit_AddDeckLid = 0, bit_RefineBowAndStern = 0, namepath = 'Hull_Mesh'):
         # This function generates a surface of the mesh by iterating through the points on the waterlines
         
         #compute number of triangles in the mesh
-        hullTriangles = 2 * (2*PointsPerWL - 2) * (NUM_WL - 1)
-        numTriangles = hullTriangles
+        #hullTriangles = 2 * (2*PointsPerWL - 2) * (NUM_WL - 1)
+        #numTriangles = hullTriangles
         transomTriangles = 0
         
         #Generate WL
         z = np.zeros((NUM_WL,))
         
-        z[0] = 0.001*self.Dd
-        z[1:] = np.linspace(0.0, self.Dd, NUM_WL - 1)
+        z[0] = 0.0001*self.Dd
+        z[1] = 0.001*self.Dd
+        z[2:] = np.linspace(0.0, self.Dd, NUM_WL - 2)
         
         z = np.sort(z)
+
+        x = np.linspace(-self.LOA*0.5,1.5*self.LOA, 2*PointsPerWL - 1)
+
+        if bit_RefineBowAndStern:
+            # Add more points to X in the bow and stern
+            
+            x_sub1 = x[0:int(0.75*PointsPerWL)] + 0.5*(x[1] - x[0])
+            x_sub2 = x[-int(0.75*PointsPerWL):] + 0.5*(x[1] - x[0])
+            x = np.concatenate((x_sub1, x_sub2, x))
+            x = np.sort(x)
+
+            
+
     
         #Generate MeshGrid PC
-        pts = self.gen_MeshGridPointCloud(NUM_WL = NUM_WL, PointsPerLOA = PointsPerWL, Z = z, X = [], bit_GridOrList = 1)
+        pts = self.gen_MeshGridPointCloud(NUM_WL = NUM_WL, PointsPerLOA = PointsPerWL, Z = z, X = x, bit_GridOrList = 1)
         
         #start to assemble the triangles into vectors of indices from pts
         TriVec = []
@@ -1809,10 +1826,12 @@ class Hull_Parameterization:
             #Build the bow triangles Includes Port assignments
             
             if bow:
-                TriVec.append([pts[i+1][idx_WLB1],pts[i+1][0], pts[i][0]])
+                TriVec.append([pts[i+1][idx_WLB1], pts[i][0], pts[i+1][0]])
                 
                 for j in range(0,idx_WLB0):
-                    TriVec.append([pts[i+1][idx_WLB1],pts[i][j], pts[i][j+1]])
+                    TriVec.append([pts[i+1][idx_WLB1], pts[i][j+1], pts[i][j]])
+
+                
             
             else: 
                 
@@ -1824,15 +1843,16 @@ class Hull_Parameterization:
             #Build main part of hull triangles. Port Assignments
             for j in range(0, idx_WLS1-idx_WLB1):
                 
-                TriVec.append([pts[i][idx_WLB0+j],pts[i+1][idx_WLB1+j+1], pts[i+1][idx_WLB1+j]])
-                TriVec.append([pts[i][idx_WLB0+j],pts[i][idx_WLB0+j+1], pts[i+1][idx_WLB1+j+1]]) 
+                TriVec.append([pts[i][idx_WLB0+j], pts[i+1][idx_WLB1+j], pts[i+1][idx_WLB1+j+1]])
+                TriVec.append([pts[i][idx_WLB0+j], pts[i+1][idx_WLB1+j+1], pts[i][idx_WLB0+j+1]]) 
             
             #Build the stern:
             if stern:
+
                 for j in range(idx_WLS0,len(pts[i])-1):
-                    TriVec.append([pts[i+1][idx_WLS1], pts[i][j], pts[i][j+1]])
+                    TriVec.append([pts[i+1][idx_WLS1],  pts[i][j+1],pts[i][j]])
                 
-                TriVec.append([pts[i+1][idx_WLS1], pts[i][-1], pts[i+1][-1]])
+                TriVec.append([pts[i+1][idx_WLS1], pts[i+1][-1], pts[i][-1]])
             
             else:
                 
@@ -1932,7 +1952,7 @@ class Hull_Parameterization:
         2) Y -> point grid of Y offsets
                 
         '''
-        Z = np.linspace(0.0001*self.Dd, draft, NUM_WL)
+        Z = np.linspace(0.00000001*self.Dd, draft, NUM_WL)
         
         x_bow = np.zeros((len(Z),))
         x_stern = np.zeros((len(Z),))
@@ -2002,6 +2022,9 @@ class Hull_Parameterization:
     4) Righting Moment(z)     -> Not Implemented Yet
     5) Block Coefficient      -> Not Implemented yet
     6) Draft, Heel and Trim   -> Not Implemented Yet
+    7) LOA_wBulb              -> Returns the maximum length of the hull including added lengths from bulbs
+    8) Max_Beam_midship       -> Returns the maximum beam of the midship section (calculated from midship section functions)
+    9) Max_Beam_PC            -> Returns the maximum beam of the hull (Estimated from point cloud for volume calculations)
     
     '''
     
@@ -2164,6 +2187,41 @@ class Hull_Parameterization:
             WLL[i] = self.PCMeasurement[i,-1,0] - self.PCMeasurement[i,0,0]
         
         self.WL_Lengths = WLL
+
+    def Calc_LOA_wBulb(self):
+        #This function returns the length of the hull including the bulb lengths
+        
+        if self.bit_BB:
+            bow_start = min([0.0,self.BB_Prof[5]-self.BB_Prof[4]])
+        else:
+            bow_start = 0.0
+        
+        if self.bit_SB:
+            stern_end = max([self.LOA, self.SB_Prof[5]+self.SB_Prof[4]])
+        else:
+            stern_end = self.LOA
+        
+        self.LOA_wBulb = stern_end - bow_start
+        
+        return self.LOA_wBulb
+    
+    def Calc_Max_Beam_midship(self):
+        #This function returns the maximum beam of the midship section (calculated from midship section functions)
+
+        #fist check Bd vs Bc
+        if self.Bd >= self.Bc:
+            self.Max_Beam_midship = self.Bd*2.0
+        else:
+            self.Max_Beam_midship = (self.Rc_Center[0] + self.Rc)*2.0 #Max beam is the y coordinate of the center of the chine plus the radius of the chine
+
+        return self.Max_Beam_midship
+    
+    def Calc_Max_Beam_PC(self):
+        #This function returns the maximum beam of the hull (Estimated from point cloud for volume calculations)
+        
+        self.Max_Beam_PC = 2.0*np.amax(self.PCMeasurement[:,:,1])
+        
+        return self.Max_Beam_PC
             
 
     def interp(A,Z,z):
