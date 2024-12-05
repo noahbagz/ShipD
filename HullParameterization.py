@@ -117,7 +117,7 @@ class Hull_Parameterization:
         self.Lbbm = inputs[36]
         self.Rbb = inputs[37]
         self.Kappa_SB = inputs[38]
-        self.Lchecsb = inputs[39]
+        self.Lsb = inputs[39]
         self.HSBOA = inputs[40]
         self.Hsb = inputs[41]
         self.Bsb = inputs[42]
