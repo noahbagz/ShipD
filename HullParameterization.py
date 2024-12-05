@@ -117,7 +117,7 @@ class Hull_Parameterization:
         self.Lbbm = inputs[36]
         self.Rbb = inputs[37]
         self.Kappa_SB = inputs[38]
-        self.Lsb = inputs[39]
+        self.Lchecsb = inputs[39]
         self.HSBOA = inputs[40]
         self.Hsb = inputs[41]
         self.Bsb = inputs[42]
@@ -1548,10 +1548,10 @@ class Hull_Parameterization:
         # This generates each waterline with even x and z spacing in a grid
         #Z and X assignments supercede NUM_WL and PointsPerLOA Assignments
         
-        if Z == []:
+        if len(Z) == 0:
             Z = np.linspace(0.0001*self.Dd,self.Dd, NUM_WL)
 
-        if X == []:
+        if len(X) == 0:
             X = np.linspace(-self.LOA*0.5,1.5*self.LOA, 2*PointsPerLOA - 1)
 
         Points = []
