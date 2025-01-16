@@ -1836,30 +1836,31 @@ class Hull_Parameterization:
             else: 
                 
                 for j in range(0,idx_WLB1):
-                    TriVec.append([pts[i][0],pts[i+1][j], pts[i+1][j+1]])
+                    TriVec.append([pts[i][1],pts[i+1][j], pts[i+1][j+1]])
                     
-                TriVec.append([pts[i][0],pts[i+1][idx_WLB1], pts[i][idx_WLB0]])
+                TriVec.append([pts[i][0],pts[i+1][0], pts[i][1]])
             
             #Build main part of hull triangles. Port Assignments
             for j in range(0, idx_WLS1-idx_WLB1):
                 
-                TriVec.append([pts[i][idx_WLB0+j], pts[i+1][idx_WLB1+j], pts[i+1][idx_WLB1+j+1]])
-                TriVec.append([pts[i][idx_WLB0+j], pts[i+1][idx_WLB1+j+1], pts[i][idx_WLB0+j+1]]) 
+                TriVec.append([pts[i][idx_WLB0+j], pts[i][idx_WLB0+j+1], pts[i+1][idx_WLB1+j]])
+                TriVec.append([pts[i][idx_WLB0+j+1], pts[i+1][idx_WLB1+j], pts[i+1][idx_WLB1+j+1]])
             
             #Build the stern:
             if stern:
+             
+                for j in range(idx_WLS0+1,len(pts[i])-1):
+                    TriVec.append([pts[i+1][-1],  pts[i][j+1],pts[i][j]])
 
-                for j in range(idx_WLS0,len(pts[i])-1):
-                    TriVec.append([pts[i+1][idx_WLS1],  pts[i][j+1],pts[i][j]])
-                
-                TriVec.append([pts[i+1][idx_WLS1], pts[i+1][-1], pts[i][-1]])
+                TriVec.append([pts[i+1][-1], pts[i+1][idx_WLS1], pts[i][idx_WLS0+1]])
+                TriVec.append([pts[i+1][idx_WLS1], pts[i][idx_WLS0], pts[i][idx_WLS0+1]])
             
             else:
                 
-                TriVec.append([pts[i][idx_WLS0], pts[i+1][idx_WLS1], pts[i][-1]])
+                TriVec.append([pts[i][-2], pts[i+1][-1], pts[i][-1]])
                 
                 for j in range(idx_WLS1, len(pts[i+1])-1):
-                    TriVec.append([pts[i][-1], pts[i+1][j], pts[i+1][j+1]])
+                    TriVec.append([pts[i][-2], pts[i+1][j], pts[i+1][j+1]])
             
         
         TriVec = np.array(TriVec)
