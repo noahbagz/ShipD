@@ -1842,9 +1842,14 @@ class Hull_Parameterization:
             
             #Build main part of hull triangles. Port Assignments
             for j in range(0, idx_WLS1-idx_WLB1):
-                
-                TriVec.append([pts[i][idx_WLB0+j], pts[i][idx_WLB0+j+1], pts[i+1][idx_WLB1+j]])
-                TriVec.append([pts[i][idx_WLB0+j+1], pts[i+1][idx_WLB1+j], pts[i+1][idx_WLB1+j+1]])
+                if np.linalg.norm(pts[i][idx_WLB0+j+1] - pts[i+1][idx_WLB1+j]) < np.linalg.norm(pts[i][idx_WLB0+j] - pts[i+1][idx_WLB1+j+1]):
+                    a = a + 1
+                    TriVec.append([pts[i][idx_WLB0+j+1], pts[i][idx_WLB0+j], pts[i+1][idx_WLB1+j]])
+                    TriVec.append([pts[i][idx_WLB0+j+1], pts[i+1][idx_WLB1+j], pts[i+1][idx_WLB1+j+1]])
+                else:
+                    b = b + 1
+                    TriVec.append([pts[i][idx_WLB0+j+1], pts[i][idx_WLB0+j], pts[i+1][idx_WLB1+j+1]])
+                    TriVec.append([pts[i][idx_WLB0+j], pts[i+1][idx_WLB1+j], pts[i+1][idx_WLB1+j+1]])
             
             #Build the stern:
             if stern:
@@ -1852,8 +1857,8 @@ class Hull_Parameterization:
                 for j in range(idx_WLS0+1,len(pts[i])-1):
                     TriVec.append([pts[i+1][-1],  pts[i][j+1],pts[i][j]])
 
-                TriVec.append([pts[i+1][-1], pts[i+1][idx_WLS1], pts[i][idx_WLS0+1]])
-                TriVec.append([pts[i+1][idx_WLS1], pts[i][idx_WLS0], pts[i][idx_WLS0+1]])
+                TriVec.append([pts[i+1][-1], pts[i][idx_WLS0+1], pts[i+1][idx_WLS1]])
+                TriVec.append([pts[i+1][idx_WLS1], pts[i][idx_WLS0+1], pts[i][idx_WLS0]])
             
             else:
                 
