@@ -1843,11 +1843,9 @@ class Hull_Parameterization:
             #Build main part of hull triangles. Port Assignments
             for j in range(0, idx_WLS1-idx_WLB1):
                 if np.linalg.norm(pts[i][idx_WLB0+j+1] - pts[i+1][idx_WLB1+j]) < np.linalg.norm(pts[i][idx_WLB0+j] - pts[i+1][idx_WLB1+j+1]):
-                    a = a + 1
                     TriVec.append([pts[i][idx_WLB0+j+1], pts[i][idx_WLB0+j], pts[i+1][idx_WLB1+j]])
                     TriVec.append([pts[i][idx_WLB0+j+1], pts[i+1][idx_WLB1+j], pts[i+1][idx_WLB1+j+1]])
                 else:
-                    b = b + 1
                     TriVec.append([pts[i][idx_WLB0+j+1], pts[i][idx_WLB0+j], pts[i+1][idx_WLB1+j+1]])
                     TriVec.append([pts[i][idx_WLB0+j], pts[i+1][idx_WLB1+j], pts[i+1][idx_WLB1+j+1]])
             
