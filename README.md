@@ -1,6 +1,6 @@
 # Ship-D #
 Ship-D is a Dataset of 30,000 ship hulls for machine learning applications to ship design. 
-Here is a link to the Dataset, Sample Code, and Documentation: https://www.dropbox.com/sh/jg98r425v7ly89l/AAA49uMr7_mhaVmRDrPq0NU_a?dl=0
+Here is a link to the Dataset, Sample Code, and Documentation: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/MMGAUS
 
 ## Design Representation ## 
 The Ship-D Hulls are represented by a parametric design scheme that allows for a large diversity of hull shapes to be constructed. There are 45 parameters that define:
